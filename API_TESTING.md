@@ -1,4 +1,4 @@
-# 📡 API Testing Guide
+# API Testing Guide
 
 ## Base URL
 

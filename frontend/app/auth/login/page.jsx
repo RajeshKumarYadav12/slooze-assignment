@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -29,10 +29,13 @@ export default function LoginPage() {
 
   const fetchUsers = async () => {
     try {
+      console.log("Fetching users from:", `${API_URL}/auth/users`);
       const response = await axios.get(`${API_URL}/auth/users`);
-      setUsers(response.data.data);
+      console.log("Users fetched:", response.data);
+      setUsers(response.data.data || []);
     } catch (error) {
       console.error("Error fetching users:", error);
+      console.error("API URL:", API_URL);
     } finally {
       setUsersLoading(false);
     }
